@@ -11,11 +11,11 @@ public class SparkMinIO {
 
     public static void main(String args[]){
 
-        SparkConf conf = new SparkConf().setAppName("SparkMinIO").setMaster("local[2]");
+        SparkConf conf = new SparkConf().setAppName("SparkMinIO");
         SparkContext sparkContext = new SparkContext(conf);
         sparkContext.setLogLevel("WARN");
         SparkSession spark = SparkSession.builder().sparkContext(sparkContext).getOrCreate();
-        sparkContext.hadoopConfiguration().set("fs.s3a.endpoint", "http://localhost:9000");
+        sparkContext.hadoopConfiguration().set("fs.s3a.endpoint", "http://minio.default.svc.cluster.local:9000");
         sparkContext.hadoopConfiguration().set("fs.s3a.access.key", "AKIAIOSFODNN7EXAMPLE");
         sparkContext.hadoopConfiguration().set("fs.s3a.secret.key", "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
         sparkContext.hadoopConfiguration().set("fs.s3a.path.style.access", "true");
