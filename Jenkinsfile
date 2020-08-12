@@ -42,7 +42,6 @@ spec:
     stage('Build') {
       steps {
         container('maven') {
-          git 'https://github.com/aicloudpods/aicp-minio.git'
           sh 'mvn clean install'
         }
       }
@@ -52,7 +51,6 @@ spec:
         container('docker') {
             withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                 sh """
-                 echo user $user pass $pass
                  docker login --username $user --password $pass
                  docker build -t aicp/aicp-minio:$BUILD_NUMBER .
                  docker push aicp/aicp-minio:$BUILD_NUMBER
