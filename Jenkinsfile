@@ -2,7 +2,7 @@ pipeline {
 
   agent {
     kubernetes {
-      label 'aicp-launcher-build'
+      label 'aicp-minio-build'
       yamlFile 'JenkinsAgentPod.yaml'
       defaultContainer 'jnlp'
     }
