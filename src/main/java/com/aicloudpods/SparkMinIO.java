@@ -34,5 +34,8 @@ public class SparkMinIO {
 
         minioSelectCSV.show();
         minioSelectCSV.printSchema();
+
+        spark.stop();
+        sparkContext.stop();
     }
 }
