@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    component: ci
+spec:
+  containers:
+    - name: maven
+      image: maven:latest
+      command:
+        - cat
+      tty: true
+      volumeMounts:
+        - mountPath: "/root/.m2"
+          name: m2
+    - name: docker
+      image: docker:latest
+      command:
+        - cat
+      tty: true
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-sock
+    - name: terraform
+      image: hashicorp/terraform:latest
+      tty: true
+      command:
+        - cat
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+    - name: m2
+      emptyDir: {}
