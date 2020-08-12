@@ -15,7 +15,7 @@ public class SparkMinIO {
         SparkContext sparkContext = new SparkContext(conf);
         sparkContext.setLogLevel("WARN");
         SparkSession spark = SparkSession.builder().sparkContext(sparkContext).getOrCreate();
-        sparkContext.hadoopConfiguration().set("fs.s3a.endpoint", "http://minio.default.svc.cluster.local:9000");
+        sparkContext.hadoopConfiguration().set("fs.s3a.endpoint", "http://minio.minio.svc.cluster.local:9000");
         sparkContext.hadoopConfiguration().set("fs.s3a.access.key", "AKIAIOSFODNN7EXAMPLE");
         sparkContext.hadoopConfiguration().set("fs.s3a.secret.key", "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY");
         sparkContext.hadoopConfiguration().set("fs.s3a.path.style.access", "true");
