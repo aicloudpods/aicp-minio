@@ -9,7 +9,7 @@ import org.apache.spark.sql.types.*;
 
 public class SparkMinIO {
 
-    public static void main(String args[]){
+    public static void main(String args[]) throws InterruptedException {
 
         SparkConf conf = new SparkConf().setAppName("SparkMinIO");
         SparkContext sparkContext = new SparkContext(conf);
@@ -33,6 +33,8 @@ public class SparkMinIO {
                 .load("s3://aicp-minio/customer.csv");
 
         minioSelectCSV.show();
+
+        Thread.sleep(30000);
         minioSelectCSV.printSchema();
 
         spark.stop();
