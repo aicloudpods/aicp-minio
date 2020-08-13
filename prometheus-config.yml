@@ -1,0 +1,18 @@
+lowercaseOutputName: true
+attrNameSnakeCase: true
+rules:
+  # These come from the master
+  # Example: master.aliveWorkers
+  - pattern: "metrics<name=master\\.(.*)><>Value"
+    name: spark_master_$1
+
+  # These come from the worker
+  # Example: worker.coresFree
+  - pattern: "metrics<name=worker\\.(.*)><>Value"
+    name: spark_worker_$1
+
+  # These come from the application driver
+  - pattern: metrics<name=(\S+)\.driver\.(BlockManager|DAGScheduler)\.(\S+)><>Value
+    name: spark_$2_$3
+    labels:
+      app_id: "$1"
