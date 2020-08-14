@@ -12,4 +12,4 @@ data:
         type: prometheus
         access: proxy
         orgId: 1
-        url: http://pro-prometheus-server.spark.svc.cluster.local
+        url: http://prometheus-server.monitoring.svc.cluster.local
