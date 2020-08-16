@@ -1,0 +1,5 @@
+resources:
+  requests:
+    memory: 500Mi
+persistence:
+  size: 10Mi
