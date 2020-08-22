@@ -50,6 +50,11 @@ public class SparkMinIO {
         nameaccno,
         namemonth
     }
+
+    /*
+    arg[0] = Env
+    arg[1] = Type
+     */
     public static void main(String args[]) throws Exception{
         Env env = Env.valueOf(args[0]);
 
