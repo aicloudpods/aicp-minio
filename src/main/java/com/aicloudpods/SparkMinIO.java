@@ -66,11 +66,15 @@ public class SparkMinIO {
      */
     public static void main(String args[]) throws Exception{
         Env env = Env.valueOf(args[0]);
+        String mongoUser = args[2];
+        String mongoPwd = args[3];
 
         SparkConf conf = getSparkConfig(env);
-        conf.set("spark.mongodb.output.uri", "mongodb://root:fO1UGfRWwO@"+env.mongoUrl+":27017/aicp."+args[1]+"?authSource=admin");
+        conf.set("spark.mongodb.output.uri", "mongodb://"+mongoUser+":"+mongoPwd+"@"+env.mongoUrl+":27017/aicp."+args[1]+"?authSource=admin");
+        conf.set("spark.mongodb.input.uri", "mongodb://"+mongoUser+":"+mongoPwd+"@"+env.mongoUrl+":27017/aicp."+args[1]+"?authSource=admin");
+        conf.set("spark.mongodb.input.readPreference.name", "secondaryPreferred");
         SparkContext sparkContext = new SparkContext(conf);
-        //sparkContext.setLogLevel("WARN");
+        sparkContext.setLogLevel("WARN");
         SparkSession spark = SparkSession
                 .builder()
                 .sparkContext(sparkContext)
